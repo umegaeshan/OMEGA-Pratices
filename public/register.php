@@ -12,6 +12,7 @@ if (isset($_POST['register_btn'])) {
     $password = $_POST['password'];
     $email = $_POST['email'];
     $mobile_no = $_POST['mobile_no'];
+    $role = $_POST['role'];
 
     $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
@@ -19,19 +20,19 @@ if (isset($_POST['register_btn'])) {
 
     if (mysqli_num_rows($check_email) == 0) {
 
-        $sql = "INSERT INTO users(username,email,password,mobile_no) VALUES('$username','$email','$hashed_password','$mobile_no')";
+        $sql = "INSERT INTO users(username, email, password, mobile_no, role) VALUES('$username', '$email', '$hashed_password', '$mobile_no', '$role')";
+
         if (mysqli_query($conn, $sql)) {
-            $message = "Regestration Successfull !";
+            header("Location: login.php");
+            exit();
         } else {
-            $message = "Registration Unsuccessfull !" . mysqli_error($conn);
+            $message = "Registration Unsuccessful! " . mysqli_error($conn);
         }
     } else {
-        $message = "This Email Alrady Registerd !";
+        $message = "This Email Already Registered!";
     }
 }
-
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -49,19 +50,19 @@ if (isset($_POST['register_btn'])) {
 
             <div>
                 <label> Username</label>
-                <input type="text" name="username">
+                <input type="text" name="username" required>
                 <br><br>
 
                 <label>Email</label>
-                <input type="email" name="email">
+                <input type="email" name="email" required>
                 <br><br>
 
                 <label> Password</label>
-                <input type="password" name="password">
+                <input type="password" name="password" required>
                 <br><br>
 
                 <label>Mobile No</label>
-                <input type="rext" name="mobile_no">
+                <input type="rext" name="mobile_no" required>
                 <br><br>
 
                 <label>User Role</label>
