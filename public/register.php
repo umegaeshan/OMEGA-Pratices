@@ -8,7 +8,7 @@ $message = "";
 
 if (isset($_POST['register_btn'])) {
 
-    $username = $_POST['username '];
+    $username = $_POST['username'];
     $password = $_POST['password'];
     $email = $_POST['email'];
     $mobile_no = $_POST['mobile_no'];
@@ -19,11 +19,11 @@ if (isset($_POST['register_btn'])) {
 
     if (mysqli_num_rows($check_email) == 0) {
 
-        $sql = "INSERT INTO users(username,email,password,mobile_no) VALUES('$username','$email','$hashed_password','$mobile_no');";
+        $sql = "INSERT INTO users(username,email,password,mobile_no) VALUES('$username','$email','$hashed_password','$mobile_no')";
         if (mysqli_query($conn, $sql)) {
             $message = "Regestration Successfull !";
         } else {
-            $message = "Registration Unsuccessfull !";
+            $message = "Registration Unsuccessfull !" . mysqli_error($conn);
         }
     } else {
         $message = "This Email Alrady Registerd !";
@@ -43,27 +43,28 @@ if (isset($_POST['register_btn'])) {
 
 <body>
     <center>
+        <h3><?php echo $message ?></h3>
         <h1> Register Now </h1>
-        <form action="register.php" methos="post">
+        <form action="register.php" method="post">
 
             <div>
-                <lable> Username</lable>
+                <label> Username</label>
                 <input type="text" name="username">
                 <br><br>
 
-                <lable>Email</lable>
+                <label>Email</label>
                 <input type="email" name="email">
                 <br><br>
 
-                <lable> Password</lable>
+                <label> Password</label>
                 <input type="password" name="password">
                 <br><br>
 
-                <lable>Mobile No</lable>
+                <label>Mobile No</label>
                 <input type="rext" name="mobile_no">
                 <br><br>
 
-                <lable>User Role</lable>
+                <label>User Role</label>
                 <select name="role">
                     <option value="" selected>Select User Role</option>
                     <option value="user"> User</option>
