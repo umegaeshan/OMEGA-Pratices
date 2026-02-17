@@ -10,6 +10,7 @@
             <?php if ($_SESSION['role'] == 'admin'): ?>
                 <a href="../admin/admin_dashbord.php" style="color: yellow; margin-right: 55px;">Admin Dashboard</a>
                 <a href="../admin/manage_products.php" style="color: yellow; margin-right: 55px;">Manage Products</a>
+                <a href="../admin/add_product.php" style="color: yellow; margin-right: 55px;">Add Products</a>
             <?php endif; ?>
 
             <?php if ($_SESSION['role'] == 'user'): ?>
@@ -21,7 +22,7 @@
             <a href="../public/profile.php" style="color: white; margin-right: 550px;">Profile</a>
 
             <span style="margin-left: 10px;margin-left: 50px;">Hi, <?php echo $_SESSION['username']; ?></span>
-            <a href="../public/logout.php" style="background: red; color: white; padding: 5px 10px; text-decoration: none; border-radius: 5px;">Logout</a>
+            <a href="../public/login.php" style="background: red; color: white; padding: 5px 10px; text-decoration: none; border-radius: 5px;">Logout</a>
 
         <?php else: ?>
             <a href="../public/login.php" style="color: white; margin-right: 15px;">Login</a>

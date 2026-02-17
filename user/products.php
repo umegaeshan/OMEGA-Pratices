@@ -2,23 +2,19 @@
 session_start();
 include_once("../connect/connect.php");
 
-// 1. මූලික Query එක සකස් කිරීම
-$whereClause = "WHERE 1=1"; // පෙරීම පටන් ගැනීමට මූලික කොන්දේසිය
+$whereClause = "WHERE 1=1";
 
-// Category එක තෝරා ඇත්නම්
 if (isset($_GET['category']) && $_GET['category'] != '') {
     $cat = $_GET['category'];
     $whereClause .= " AND category = '$cat'";
 }
 
-// Price Range එක තෝරා ඇත්නම්
 if (isset($_GET['min_price']) && isset($_GET['max_price']) && $_GET['max_price'] != '') {
     $min = $_GET['min_price'];
     $max = $_GET['max_price'];
     $whereClause .= " AND price BETWEEN $min AND $max";
 }
 
-// අවසාන SQL Query එක
 $sql = "SELECT * FROM products $whereClause ORDER BY created_at DESC";
 $result = mysqli_query($conn, $sql);
 ?>
@@ -30,13 +26,11 @@ $result = mysqli_query($conn, $sql);
     <meta charset="UTF-8">
     <title>All Products | OMEGA</title>
     <style>
-        /* සරල CSS */
         body {
             font-family: sans-serif;
             background-color: #f4f4f4;
         }
 
-        /* Layout එක: වම් පැත්තේ Filter, දකුණේ බඩු */
         .main-container {
             display: flex;
             padding: 20px;
@@ -58,7 +52,6 @@ $result = mysqli_query($conn, $sql);
             gap: 20px;
         }
 
-        /* Filter Form Styles */
         .filter-group {
             margin-bottom: 15px;
         }
@@ -95,7 +88,6 @@ $result = mysqli_query($conn, $sql);
             margin-top: 10px;
         }
 
-        /* Product Card Styles */
         .card {
             background: white;
             width: 220px;
@@ -118,7 +110,6 @@ $result = mysqli_query($conn, $sql);
             font-size: 18px;
         }
 
-        /* New Arrival Label */
         .new-badge {
             position: absolute;
             top: 10px;
@@ -130,7 +121,6 @@ $result = mysqli_query($conn, $sql);
             border-radius: 5px;
         }
 
-        /* Favorite Icon */
         .fav-btn {
             position: absolute;
             top: 10px;
@@ -195,7 +185,7 @@ $result = mysqli_query($conn, $sql);
             if (mysqli_num_rows($result) > 0) {
                 while ($row = mysqli_fetch_assoc($result)) {
 
-                    // New Arrival Logic එක (දින 7ක් ඇතුළත දැමූ ඒවා)
+
                     $is_new = false;
                     $product_date = new DateTime($row['created_at']);
                     $today = new DateTime();
