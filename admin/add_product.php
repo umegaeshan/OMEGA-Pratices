@@ -4,7 +4,7 @@ include_once("../connect/connect.php");
 
 // 1. Admin කෙනෙක්ද කියලා බලන ආරක්ෂක පියවර
 if (!isset($_SESSION['role']) || $_SESSION['role'] != 'admin') {
-    header("Location: ../public/login.php"); // ඇඩ්මින් නොවේ නම් එළියට
+    header("Location: ../public/login.php");
     exit();
 }
 
@@ -13,11 +13,9 @@ $message = "";
 // 2. Form එක Submit කළාම වැඩ කරන කොටස
 if (isset($_POST['add_product_btn'])) {
 
-    $name = mysqli_real_escape_string($conn, $_POST['name']);
+    $name = $_POST['name'];
     $price = $_POST['price'];
     $category = $_POST['category'];
-
-    // --- Image Upload Logic (පින්තූරය හැසිරවීම) ---
 
     // පින්තූරයේ නම ගන්නවා
     $image_name = $_FILES['image']['name'];
