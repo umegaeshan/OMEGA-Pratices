@@ -14,6 +14,7 @@
             <?php endif; ?>
 
             <?php if ($_SESSION['role'] == 'user'): ?>
+                <a href="../user/products.php" style="color: white; margin-right: 55px;">Products</a>
                 <a href="../user/my_orders.php" style="color: white; margin-right: 55px;">My Orders</a>
                 <a href="../user/cart.php" style="color: white; margin-right: 55px;">Cart</a>
             <?php endif; ?>
